@@ -154,7 +154,7 @@ function spawnParticles(
 export function IntroSection({ onDone }: { onDone: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number>(0)
   const [opacity, setOpacity] = useState(1)
   const doneRef = useRef(false)
 
