@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "orvel-parfume",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "C:\\Users\\Mansur\\Desktop\\Claud\\orvel-parfume"],
+      "port": 3000
+    }
+  ]
+}
