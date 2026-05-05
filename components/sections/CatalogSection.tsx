@@ -1,59 +1,61 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { ShoppingBag } from "lucide-react"
 
 const premiumPerfumes = [
-  { id: 1,  name: "Clive Christian Blonde Amber",  tag: "Woody · Amber" },
-  { id: 2,  name: "Creed Aventus",                 tag: "Fruity · Woody" },
-  { id: 3,  name: "Creed Aventus Absolut 2023",    tag: "Fruity · Woody" },
-  { id: 4,  name: "Roja Isola Blue",               tag: "Aquatic · Floral" },
-  { id: 5,  name: "Roja Burlington",               tag: "Oriental · Woody" },
-  { id: 6,  name: "Bvlgari Tiger",                 tag: "Citrus · Woody" },
-  { id: 7,  name: "Kilian Black Phantom",          tag: "Sweet · Rum" },
-  { id: 8,  name: "Louis Vuitton Imagination",     tag: "Citrus · Amber" },
-  { id: 9,  name: "Louis Vuitton Symphony",        tag: "Floral · Musky" },
-  { id: 10, name: "Parfums de Marly Sedley",       tag: "Aquatic · Fresh" },
-  { id: 11, name: "Roja Elysium",                  tag: "Citrus · Woody" },
-  { id: 12, name: "Mancera Amber Feel",            tag: "Amber · Oriental" },
-  { id: 13, name: "Mancera Cedrat Boise",          tag: "Citrus · Woody" },
+  { id: 1,  name: "Clive Christian Blonde Amber",  tag: "Woody · Amber",     img: "/images/clive-christian-blonde-amber.jpg" },
+  { id: 2,  name: "Creed Aventus",                 tag: "Fruity · Woody",    img: "/images/creed-aventus.jpg" },
+  { id: 3,  name: "Creed Aventus Absolut 2023",    tag: "Fruity · Woody",    img: "/images/creed-aventus-absolut.jpg" },
+  { id: 4,  name: "Roja Isola Blue",               tag: "Aquatic · Floral",  img: "/images/roja-isola-blue.jpg" },
+  { id: 5,  name: "Roja Burlington",               tag: "Oriental · Woody",  img: "/images/roja-burlington.jpg" },
+  { id: 6,  name: "Bvlgari Tiger",                 tag: "Citrus · Woody",    img: "/images/bvlgari-tygar.jpg" },
+  { id: 7,  name: "Kilian Black Phantom",          tag: "Sweet · Rum",       img: "/images/kilian-black-phantom.jpg" },
+  { id: 8,  name: "Louis Vuitton Imagination",     tag: "Citrus · Amber",    img: "/images/lv-imagination.jpg" },
+  { id: 9,  name: "Louis Vuitton Symphony",        tag: "Floral · Musky",    img: "/images/lv-symphony.jpg" },
+  { id: 10, name: "Parfums de Marly Sedley",       tag: "Aquatic · Fresh",   img: "/images/marly-sedley.jpg" },
+  { id: 11, name: "Roja Elysium",                  tag: "Citrus · Woody",    img: "/images/roja-elysium.jpg" },
+  { id: 12, name: "Mancera Amber Feel",            tag: "Amber · Oriental",  img: "/images/mancera-amberful.jpg" },
+  { id: 13, name: "Mancera Cedrat Boise",          tag: "Citrus · Woody",    img: "/images/mancera-cedrat-boise.jpg" },
 ]
 
 const budgetPerfumes = [
-  { id: 1,  name: "Chanel Allure Sport",           tag: "Fresh · Citrus" },
-  { id: 2,  name: "Chanel Fresh",                  tag: "Aquatic · Light" },
-  { id: 3,  name: "Lanvin Modern Princess",        tag: "Floral · Musky" },
-  { id: 4,  name: "Victoria's Secret Aqua Kiss",   tag: "Aquatic · Fruity" },
-  { id: 5,  name: "Antonio Banderas Blue Seduction", tag: "Woody · Fresh" },
-  { id: 6,  name: "Dior Sauvage",                  tag: "Fresh · Spicy" },
-  { id: 7,  name: "Kajal Almaz",                   tag: "Oriental · Floral" },
-  { id: 8,  name: "Versace Eros",                  tag: "Fresh · Woody" },
-  { id: 9,  name: "Dior Blooming Bouquet",         tag: "Floral · Powdery" },
-  { id: 10, name: "Mexx Fly",                      tag: "Fresh · Citrus" },
+  { id: 1,  name: "Chanel Allure Sport",           tag: "Fresh · Citrus",    img: "/images/chanel-allure-sport.jpg" },
+  { id: 2,  name: "Chanel Fresh",                  tag: "Aquatic · Light",   img: "/images/chanel-chance-fraiche.jpg" },
+  { id: 3,  name: "Lanvin Modern Princess",        tag: "Floral · Musky",    img: "/images/lanvin-modern-princess.jpg" },
+  { id: 4,  name: "Victoria's Secret Aqua Kiss",   tag: "Aquatic · Fruity",  img: "/images/victoria-aqua-kiss.jpg" },
+  { id: 5,  name: "Antonio Banderas Blue Seduction", tag: "Woody · Fresh",   img: "/images/antonio-blue-seduction.jpg" },
+  { id: 6,  name: "Dior Sauvage",                  tag: "Fresh · Spicy",     img: "/images/dior-sauvage.jpg" },
+  { id: 7,  name: "Kajal Almaz",                   tag: "Oriental · Floral", img: "/images/kajal-almaz.jpg" },
+  { id: 8,  name: "Versace Eros",                  tag: "Fresh · Woody",     img: "/images/versace-eros.jpg" },
+  { id: 9,  name: "Dior Blooming Bouquet",         tag: "Floral · Powdery",  img: "/images/dior-blooming-bouquet.jpg" },
+  { id: 10, name: "Mexx Fly",                      tag: "Fresh · Citrus",    img: "/images/mexx-fly.jpg" },
 ]
 
-function PerfumeCard({ name, tag, index }: { name: string; tag: string; index: number }) {
+function PerfumeCard({ name, tag, img, index }: { name: string; tag: string; img: string; index: number }) {
   return (
-    <div className="group relative bg-black border border-white/[0.06] hover:border-green-400/35 transition-all duration-300 overflow-hidden">
-      {/* Image placeholder */}
-      <div className="aspect-[3/4] bg-white/[0.02] flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-4 border border-white/[0.04] group-hover:border-green-400/10 transition-colors duration-300" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_60%,rgba(74,222,128,0.05),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="group relative bg-black border border-white/[0.06] hover:border-green-400/40 transition-all duration-300 overflow-hidden">
+      {/* Image area */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-[#0a0a0a]">
+        {/* Green glow on hover */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_60%,rgba(74,222,128,0.08),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
-        {/* Bottle silhouette */}
-        <div className="flex flex-col items-center gap-1 opacity-15 group-hover:opacity-30 transition-opacity duration-300">
-          <div className="w-5 h-1.5 bg-white/60 rounded-sm" />
-          <div className="w-0.5 h-3 bg-white/60" />
-          <div className="w-12 h-16 bg-white/20 border border-white/15" />
-        </div>
+        <Image
+          src={img}
+          alt={name}
+          fill
+          className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+        />
 
         {/* Index */}
-        <div className="absolute top-3 left-3 font-montserrat text-[9px] text-white/15 tracking-widest">
+        <div className="absolute top-3 left-3 font-montserrat text-[9px] text-white/20 tracking-widest z-20">
           {String(index + 1).padStart(2, "0")}
         </div>
 
         {/* Hover CTA */}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-4 flex justify-center">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-4 flex justify-center z-20">
           <button className="flex items-center gap-2 font-montserrat text-[9px] tracking-[0.4em] text-green-400 uppercase">
             <ShoppingBag className="w-3 h-3" />
             Заказать
@@ -95,7 +97,6 @@ export function CatalogSection() {
               <span className="text-lime-300">аромат</span>
             </h2>
 
-            {/* Tabs */}
             <div className="flex border border-white/10 font-montserrat text-[10px] tracking-[0.35em] uppercase">
               <button
                 onClick={() => setActiveTab("premium")}
@@ -130,7 +131,7 @@ export function CatalogSection() {
         {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px">
           {list.map((p, i) => (
-            <PerfumeCard key={p.id} name={p.name} tag={p.tag} index={i} />
+            <PerfumeCard key={p.id} name={p.name} tag={p.tag} img={p.img} index={i} />
           ))}
         </div>
 
